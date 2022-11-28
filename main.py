@@ -2,29 +2,23 @@ import pygame as pg
 
 #inicializar todos los modulos de pygame
 #pantallas,sonidos,teclados,etc..
+
+from figura_class import Rectangulo, Bolillas
+
 pg.init()
 
 #creamos una pantalla o sourface
 pantalla_principal = pg.display.set_mode( (800,600) )#ventana y tamaño de ventana
 pg.display.set_caption("Bolillas Rebotando")#titulo de la ventana
 
+rect1 = Rectangulo(450,350)
+rect2 = Rectangulo(350,250,color=(192, 57, 43))
+bolilla1=Bolillas(400,300)
+bolilla2 = Bolillas(300,200,color=(192, 57, 43))
+
+
 #Variable para parar el bucle
 game_over = False
-
-x=400
-y=300
-vx=1
-vy=1
-
-x2=300
-y2=200
-vx2=1
-vy2=1
-
-
-
-
-
 while not game_over:
     
 
@@ -34,40 +28,26 @@ while not game_over:
             game_over = True
 
     pantalla_principal.fill( (52, 152, 219) )#asignar color a la pantalla
-    x += vx
-    y += vy
-
-    x2= vx2
-    y2 = vy2
-
-    if x >= 800 or x==0:#llegue a los limites
-        vx*= -1
-    if y >= 600 or y==0:
-        vy*= -1
-
-    if x2 >= 300 or x2==0:#llegue a los limites
-        vx2*= -1
-    if y2 >= 200 or y2==0:
-        vy2*= -1
 
 
-    '''
-        x += 1
-        if y != 580:
-            y += 1
+    rect1.mover(800,600)
+    rect2.mover(800,600)
+    bolilla1.mover(800,600)
+    bolilla2.mover(800,600)
 
-    if x==780:
-        x-=1
-        '''
+    #la sourface o pantalla #color en rgb #posicion(posicionA,posicionL, tamañodel rect L,tamaño rect A)
+    
+    pg.draw.rect(pantalla_principal,rect1.color,(rect1.pos_x,rect1.pos_y,rect1.w,rect1.h))#metodo para dibujar un rectangulo
+    pg.draw.rect(pantalla_principal,rect2.color,(rect2.pos_x,rect2.pos_y,rect2.w,rect2.h))#metodo para dibujar un rectangulo
 
-                #la sourface o pantalla #color en rgb #posicion(posicionA,posicionL, tamañodel rect L,tamaño rect A)
-    pg.draw.rect(pantalla_principal,(192, 57, 43),(x,y,20,20))#metodo para dibujar un rectangulo
+    pg.draw.circle(pantalla_principal,bolilla1.color,(bolilla1.pos_x,bolilla1.pos_y),bolilla1.radio)
+    pg.draw.circle(pantalla_principal,bolilla2.color,(bolilla2.pos_x,bolilla2.pos_y),bolilla2.radio)
 
-    pg.draw.rect(pantalla_principal,(255, 255, 0),(x2,y2,20,20))
-
+    bolilla1.dibujar(pantalla_principal)
+    bolilla2.dibujar(pantalla_principal)
+    rect1.dibujar(pantalla_principal)
+    rect2.dibujar(pantalla_principal)
 
     pg.display.flip()
-
-
 
 pg.quit()
