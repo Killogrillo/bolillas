@@ -4,6 +4,8 @@ import pygame as pg
 #pantallas,sonidos,teclados,etc..
 
 from figura_class import Rectangulo, Bolillas
+from all_inclusive_class import Figura
+import random
 
 pg.init()
 
@@ -11,10 +13,16 @@ pg.init()
 pantalla_principal = pg.display.set_mode( (800,600) )#ventana y tamaño de ventana
 pg.display.set_caption("Bolillas Rebotando")#titulo de la ventana
 
-rect1 = Rectangulo(450,350)
-rect2 = Rectangulo(350,250,color=(192, 57, 43))
-bolilla1=Bolillas(400,300)
-bolilla2 = Bolillas(300,200,color=(192, 57, 43))
+#rect1 = Rectangulo(450,350)
+#rect2 = Rectangulo(350,250,color=(192, 57, 43))
+
+listaBolillas=[]
+for i in range(1,101):
+    listaBolillas.append(Figura(random.randint(0,800),random.randint(0,600),color=(random.randint(0,255), random.randint(0,255), random.randint(0,255)),radio=random.randint(5,30)) ) 
+
+
+#bolilla1=Bolillas(400,300)
+#bolilla2 = Bolillas(300,200,color=(192, 57, 43))
 
 
 #Variable para parar el bucle
@@ -29,7 +37,10 @@ while not game_over:
 
     pantalla_principal.fill( (52, 152, 219) )#asignar color a la pantalla
 
-
+    for bolilla in listaBolillas:
+        bolilla.moverCirculo(800,600)
+        bolilla.dibujarCirculo(pantalla_principal)
+    '''
     rect1.mover(800,600)
     rect2.mover(800,600)
     bolilla1.mover(800,600)
@@ -47,7 +58,7 @@ while not game_over:
     bolilla2.dibujar(pantalla_principal)
     rect1.dibujar(pantalla_principal)
     rect2.dibujar(pantalla_principal)
-
+    '''
     pg.display.flip()
 
 pg.quit()

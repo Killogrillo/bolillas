@@ -9,8 +9,8 @@ class Rectangulo:
         self.h = h
         self.color = color
 
-        self.vx = 0
-        self.vy = 0
+        self.vx = vx
+        self.vy = vy
 
     def mover(self,xmax,ymax):
         self.pos_x += self.vx
